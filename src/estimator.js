@@ -1,3 +1,5 @@
+const projectedInfections = require('./helper.js');
+
 const covid19ImpactEstimator = (data) => {
 //  Estimator
   const estimator = {};
@@ -5,8 +7,7 @@ const covid19ImpactEstimator = (data) => {
   estimator.impact = {};
   estimator.severeImpact = {};
   estimator.impact.currentlyInfected = data.reportedCases * 10;
-  estimator.impact.infectionsByRequestedTime = estimator.impact.currentlyInfected
-  * (data.timeToElapse / 3);
+  estimator.impact.infectionsByRequestedTime = estimator.impact.currentlyInfected * projectedInfections(data);
   estimator.impact.severeCasesByRequestedTime = estimator
     .impact
     .infectionsByRequestedTime * (15 / 100);
@@ -24,7 +25,7 @@ const covid19ImpactEstimator = (data) => {
     .region.avgDailyIncomeInUSD * data.timeToElapse;
   estimator.severeImpact.currentlyInfected = data.reportedCases * 50;
   estimator.severeImpact.infectionsByRequestedTime = estimator.severeImpact.currentlyInfected
-   * (data.timeToElapse / 3);
+   * projectedInfections(data);
   estimator.impact.severeCasesByRequestedTime = estimator
     .severeImpact
     .infectionsByRequestedTime * (15 / 100);
