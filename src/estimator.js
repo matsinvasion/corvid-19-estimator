@@ -28,9 +28,9 @@ const covid19ImpactEstimator = (data) => {
   estimator.severeImpact.currentlyInfected = data.reportedCases * 50;
   estimator.severeImpact.infectionsByRequestedTime = estimator.severeImpact.currentlyInfected
    * projectedInfections(data);
-  estimator.impact.severeCasesByRequestedTime = estimator.impact.currentlyInfected
+  estimator.impact.severeCasesByRequestedTime = estimator.severeImpact.currentlyInfected
   * projectedInfections(data) * (15 / 100);
-  estimator.severeImpact.hospitalBedsByRequestedTime = estimator.impact.currentlyInfected
+  estimator.severeImpact.hospitalBedsByRequestedTime = estimator.severeImpact.currentlyInfected
   * projectedInfections(data) * (15 / 100)
     - ((35 / 100) * data.totalHospitalBeds);
   estimator.severeImpact.casesForICUByRequestedTime = (5 / 100) * estimator.severeImpact
