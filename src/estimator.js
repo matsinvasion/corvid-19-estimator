@@ -1,4 +1,5 @@
-const projectedInfections = require('./helper.js');
+import projectedInfections from './helper';
+
 
 const covid19ImpactEstimator = (data) => {
 //  Estimator
