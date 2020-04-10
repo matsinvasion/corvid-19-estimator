@@ -19,9 +19,9 @@ const covid19ImpactEstimator = (data) => {
     .infectionsByRequestedTime);
   estimator.impact.casesForVentilatorsByRequestedTime = Math.trunc(0.02 * estimator.impact
     .infectionsByRequestedTime);
-  estimator.impact.dollarsInFlight = estimator.impact.infectionsByRequestedTime * data
+  estimator.impact.dollarsInFlight = Math.trunc((estimator.impact.infectionsByRequestedTime * data
     .region.avgDailyIncomePopulation * data
-    .region.avgDailyIncomeInUSD * data.timeToElapse;
+    .region.avgDailyIncomeInUSD) / data.timeToElapse);
   estimator.severeImpact.currentlyInfected = data.reportedCases * 50;
   estimator.severeImpact.infectionsByRequestedTime = estimator.severeImpact.currentlyInfected
    * projectedInfections(data);
@@ -34,9 +34,10 @@ const covid19ImpactEstimator = (data) => {
   estimator.severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(0.02 * estimator
     .severeImpact
     .infectionsByRequestedTime);
-  estimator.severeImpact.dollarsInFlight = estimator.severeImpact.infectionsByRequestedTime * data
+  estimator.severeImpact.dollarsInFlight = Math.trunc((estimator.severeImpact
+    .infectionsByRequestedTime * data
     .region.avgDailyIncomePopulation * data
-    .region.avgDailyIncomeInUSD * data.timeToElapse;
+    .region.avgDailyIncomeInUSD) / data.timeToElapse);
   return estimator;
 };
 
