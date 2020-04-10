@@ -12,4 +12,4 @@ const timeToElapse = (data) => {
   return 0;
 };
 
-export default { projectedInfections, timeToElapse };
+export { projectedInfections, timeToElapse };
