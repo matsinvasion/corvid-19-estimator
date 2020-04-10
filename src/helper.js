@@ -5,4 +5,11 @@ const projectedInfections = (data) => {
   return 0;
 };
 
-export default projectedInfections;
+const timeToElapse = (data) => {
+  if (data.periodType === 'days') return data.timeToElapse;
+  if (data.periodType === 'weeks') return data.timeToElapse * 7;
+  if (data.periodType === 'Months') return data.timeToElapse * 30;
+  return 0;
+};
+
+export default { projectedInfections, timeToElapse };
