@@ -8,7 +8,7 @@ const projectedInfections = (data) => {
 const timeToElapse = (data) => {
   if (data.periodType === 'days') return data.timeToElapse;
   if (data.periodType === 'weeks') return data.timeToElapse * 7;
-  if (data.periodType === 'Months') return data.timeToElapse * 30;
+  if (data.periodType === 'months') return data.timeToElapse * 30;
   return 0;
 };
 exports.timeToElapse = timeToElapse;
