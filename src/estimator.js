@@ -1,16 +1,16 @@
-const express = require('express');
+// const express = require('express');
 
-const app = express();
-const fs = require('fs');
-const morgan = require('morgan');
-const path = require('path');
-const { toXML } = require('jstoxml');
+// const app = express();
+// const fs = require('fs');
+// const morgan = require('morgan');
+// const path = require('path');
+// const { toXML } = require('jstoxml');
 const helperFunctions = require('./helper');
 
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
-app.use(morgan(':method :url :status :response-time ms', { stream: accessLogStream }));
-app.use(express.json());
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+// app.use(morgan(':method :url :status :response-time ms', { stream: accessLogStream }));
+// app.use(express.json());
 
 const covid19ImpactEstimator = (data) => {
   //  Estimator
@@ -52,37 +52,4 @@ const covid19ImpactEstimator = (data) => {
   return estimator;
 };
 
-app.post('/api/v1/on-covid-19/', (req, res) => {
-  if (JSON.stringify(req.body) === '{}') return res.status(400).send('Bad Resquest, provide correct data object.');
-
-  const response = covid19ImpactEstimator(req.body);
-  return res.send(response);
-});
-//  this violates the DRY principle
-app.post('/api/v1/on-covid-19/json', (req, res) => {
-  if (JSON.stringify(req.body) === '{}') return res.status(400).send('Bad Resquest, provide correct data object.');
-
-  const response = covid19ImpactEstimator(req.body);
-  return res.send(response);
-});
-app.post('/api/v1/on-covid-19/xml', (req, res) => {
-  if (JSON.stringify(req.body) === '{}') return res.status(400).send('Bad Resquest, provide correct data object.');
-  const response = covid19ImpactEstimator(req.body);
-  return res.send(toXML(response));
-});
-app.get('/api/v1/on-covid-19/log', (req, res) => {
-  fs.readFile('./access.log', 'utf8', (err, data) => {
-    if (err) throw err;
-    // line by line
-    res.format({
-      'text/plain': () => {
-        res.send(data);
-      }
-    });
-  });
-});
-// server
-const port = process.env.PORT || 3000;
-// const server = app.listen(port, () => winston.info(`Listening on port ${port}...`));
-app.listen(port, () => {
-});
+export default covid19ImpactEstimator;
