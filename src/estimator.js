@@ -5,7 +5,7 @@
 // const morgan = require('morgan');
 // const path = require('path');
 // const { toXML } = require('jstoxml');
-const helperFunctions = require('./helper');
+import * as helperFunctions from './helper';
 
 
 // const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
